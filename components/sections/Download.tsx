@@ -27,7 +27,7 @@ function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
         <HighlightCard
             title={platform.os}
             description={[
-                `${platform.version} · ${platform.arch} · ${platform.size}`
+                `${platform.arch}`
             ]}
             icon={<span style={{ fontSize: '36px', color: 'var(--color-text-DEFAULT)' }}>{icon}</span>}
         >

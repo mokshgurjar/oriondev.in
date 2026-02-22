@@ -109,9 +109,9 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
 ]
 
 export const PLATFORMS: Platform[] = [
-    { os: 'Windows', icon: 'AppWindow', version: 'v2.0.1', size: '142 MB', arch: '64-bit', featured: false },
-    { os: 'macOS', icon: 'Command', version: 'v2.0.1', size: '138 MB', arch: 'Universal Binary', featured: true },
-    { os: 'Linux', icon: 'Hexagon', version: 'v2.0.1', size: '136 MB', arch: '.deb / .rpm', featured: false },
+    { os: 'Windows', icon: 'AppWindow', arch: '64-bit', featured: false },
+    { os: 'macOS', icon: 'Command', arch: 'Universal Binary', featured: true },
+    { os: 'Linux', icon: 'Hexagon', arch: '.deb / .rpm', featured: false },
 ]
 
 export const STATS: Stat[] = [

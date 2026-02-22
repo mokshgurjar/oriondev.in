@@ -24,8 +24,6 @@ export interface ComparisonRow {
 export interface Platform {
     os: string
     icon: string
-    version: string
-    size: string
     arch: string
     featured: boolean
 }

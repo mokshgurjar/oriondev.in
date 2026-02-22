@@ -2,14 +2,50 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { NAV_LINKS } from '@/lib/data'
+
+type NavLabel = typeof NAV_LINKS[number]['label'];
 
 export default function Nav() {
     const [scrolled, setScrolled] = useState(false)
+    const [activeTab, setActiveTab] = useState<NavLabel>(NAV_LINKS[0].label)
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 60)
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 60)
+            
+            // ScrollSpy logic mapping refs to sections
+            const sections = NAV_LINKS.map(link => link.href.substring(1)); // e.g. 'features', 'pipeline', etc
+            let maxTop = -Infinity;
+            let currentTab: NavLabel | null = null;
+
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    // Find the section whose top is closest to the 300px threshold (without going strictly below it).
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 300 && rect.top > maxTop) {
+                        maxTop = rect.top;
+                        const match = NAV_LINKS.find(link => link.href === `#${section}`);
+                        if (match) currentTab = match.label as NavLabel;
+                    }
+                }
+            }
+            
+            // If we're at the very top and no section is <= 300px yet, just highlight the first one
+            if (!currentTab) {
+                currentTab = NAV_LINKS[0].label;
+            }
+            
+            setActiveTab(prev => currentTab ? currentTab : prev);
+        }
+
+        // Add scroll listener
         window.addEventListener('scroll', handleScroll, { passive: true })
+        // Trigger once on mount to set initial correct tab if loaded mid-page
+        handleScroll();
+        
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
@@ -55,36 +91,38 @@ export default function Nav() {
                 </Link>
 
                 {/* nav-links */}
-                <ul
-                    style={{
-                        display: 'flex',
-                        gap: '36px',
-                        listStyle: 'none',
-                        margin: 0,
-                        padding: 0,
-                    }}
-                    className="max-md:hidden"
-                >
-                    {NAV_LINKS.map((link) => (
-                        <li key={link.href}>
-                            <Link
-                                href={link.href}
-                                style={{
-                                    fontFamily: 'var(--font-mono)',
-                                    fontSize: '12px',
-                                    color: 'var(--color-text-mid)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.08em',
-                                    transition: 'color 0.3s',
-                                    textDecoration: 'none',
-                                }}
-                                onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text-DEFAULT)')}
-                                onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-mid)')}
-                            >
-                                {link.label}
-                            </Link>
-                        </li>
-                    ))}
+                <ul className="max-md:hidden flex items-center gap-9 m-0 p-0 list-none">
+                    {NAV_LINKS.map((link) => {
+                        const isActive = activeTab === link.label;
+                        
+                        return (
+                            <li key={link.href} className="relative">
+                                <Link
+                                    href={link.href}
+                                    onClick={() => setActiveTab(link.label)}
+                                    className={`relative px-1 py-4 font-mono text-[12px] uppercase tracking-[0.08em] transition-colors outline-none block ${
+                                        isActive ? "text-text-DEFAULT" : "text-text-mid hover:text-text-DEFAULT"
+                                    }`}
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    {link.label}
+                                    
+                                    {/* The Sliding Underline */}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="activeTabUnderline"
+                                            className="absolute bottom-1 left-0 right-0 h-[2px] border-b-2 border-dashed border-red-bright z-10"
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 380,
+                                                damping: 30,
+                                            }}
+                                        />
+                                    )}
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
 
                 {/* nav-cta */}
