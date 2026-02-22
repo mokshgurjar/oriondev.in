@@ -6,6 +6,8 @@ import Features from '@/components/sections/Features'
 import Reasons from '@/components/sections/Reasons'
 import Pipeline from '@/components/sections/Pipeline'
 import Validation from '@/components/sections/Validation'
+import ExecutionModes from '@/components/sections/ExecutionModes'
+import Mcp from '@/components/sections/Mcp'
 import Compare from '@/components/sections/Compare'
 import Quote from '@/components/sections/Quote'
 import Footer from '@/components/layout/Footer'
@@ -21,6 +23,8 @@ export default function Home() {
       <Reasons />
       <Pipeline />
       <Validation />
+      <ExecutionModes />
+      <Mcp />
       <Compare />
       <Quote />
       <Footer />

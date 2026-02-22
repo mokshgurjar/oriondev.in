@@ -1,38 +1,58 @@
-import type { PipelineStep } from '@/types'
+'use client'
 
-// Original .pipeline-cell: padding 24px 20px, border-right 1px border, border-bottom 1px border, transition bg 0.3s
-// :nth-child(5n): border-right none
-// :nth-child(n+11): border-bottom none
-// :hover: bg red-dim
-// .pipeline-step-num: mono, 10px, red-deep, mb 6px
-// .pipeline-step-name: mono, 11px, text
+import { useState } from 'react'
+import type { PipelineStep } from '@/types'
 
 interface PipelineStepProps {
     step: PipelineStep
     index: number
+    totalSteps?: number
 }
 
-export default function PipelineStepComponent({ step, index }: PipelineStepProps) {
-    // 15 steps in 5-col grid = 3 rows. Last row = steps 11-15 (index 10-14)
-    const isLastInRow5 = (index + 1) % 5 === 0
-    const isLastInRow3 = (index + 1) % 3 === 0
-    const isInLastRow = index >= 10
+export default function PipelineStepComponent({
+    step,
+    index,
+    totalSteps = 15,
+}: PipelineStepProps) {
+    const [hovered, setHovered] = useState(false)
+
+    // .pipeline-cell:nth-child(5n) → border-right: none
+    const isLastInDesktopRow = (index + 1) % 5 === 0
+    // .pipeline-cell:nth-child(n+11) → border-bottom: none (last row of 3 in 5-col = items 11–15)
+    const isLastDesktopRow = index >= totalSteps - 5
 
     return (
         <div
-            className={[
-                'p-[24px_20px] transition-[background] duration-300 hover:bg-red-dim border-b border-border',
-                isLastInRow5 ? 'border-r-0' : 'border-r border-border',
-                isInLastRow ? 'border-b-0' : '',
-                // mobile: 3-col, override 5th-col rule, apply 3rd-col rule
-                'max-md:border-r max-md:border-border',
-                isLastInRow3 ? 'max-md:border-r-0' : '',
-            ].join(' ')}
+            style={{
+                padding: '24px 20px',
+                borderRight: isLastInDesktopRow ? 'none' : '1px solid var(--color-border-DEFAULT)',
+                borderBottom: isLastDesktopRow ? 'none' : '1px solid var(--color-border-DEFAULT)',
+                transition: 'background 0.3s',
+                background: hovered ? 'var(--color-red-dim)' : 'transparent',
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
         >
-            <div className="font-mono text-[10px] text-red-deep mb-[6px]">
+            {/* .pipeline-step-num: mono, 10px, red-deep, mb 6px */}
+            <div
+                style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    color: 'var(--color-red-deep)',
+                    marginBottom: '6px',
+                }}
+            >
                 {step.num}
             </div>
-            <div className="font-mono text-[11px] text-text-DEFAULT">
+
+            {/* .pipeline-step-name: mono, 11px, text */}
+            <div
+                style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--color-text-DEFAULT)',
+                }}
+            >
                 {step.name}
             </div>
         </div>

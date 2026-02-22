@@ -74,18 +74,26 @@ export const FEATURES: Feature[] = [
     },
 ]
 
-export const COMPARISON_COLS = ['Orion', 'Antigravity', 'Cursor', 'Windsurf', 'PearAI'] as const
+export const COMPARISON_COLS = ['Orion', 'Antigravity', 'Cursor', 'Windsurf', 'Claude Code'] as const
 
 export const COMPARISON_ROWS: ComparisonRow[] = [
     { feature: 'Deterministic output', values: [true, false, false, false, false] },
     { feature: 'Pre-code formal contracts (IISG)', values: [true, false, false, false, false] },
+    { feature: 'MCP integrated into execution pipeline', values: [true, false, false, false, false] },
+    { feature: 'MCP tool declarations in IISG contracts', values: [true, false, false, false, false] },
     { feature: '6-layer validation gate', values: [true, false, false, false, false] },
     { feature: 'Atomic transactional executor', values: [true, false, false, false, false] },
     { feature: 'Pre-execution cost preview', values: [true, false, false, false, false] },
-    { feature: 'Full AI decision auditability', values: [true, false, false, false, false] },
-    { feature: 'Parallel agent execution', values: [true, true, false, false, false] },
-    { feature: 'Agent-first architecture', values: [true, true, true, true, true] },
-    { feature: 'Free to use', values: [true, true, '$20/mo', '$15/mo', true] },
+    { feature: 'Full AI + MCP decision audit log', values: [true, false, false, false, false] },
+    { feature: 'User-controlled execution mode', values: [true, false, false, false, false] },
+    { feature: 'UI-driven MCP Store (no config files)', values: [true, true, false, false, false] },
+    { feature: 'Git-scoped MCP config (.mcp.json)', values: [true, false, false, false, true] },
+    { feature: 'Per-agent MCP tool isolation', values: [true, false, false, false, false] },
+    { feature: 'Skills system (SKILL.md)', values: [true, false, false, false, true] },
+    { feature: 'Always-on context file (ORION.md)', values: [true, false, false, false, true] },
+    { feature: 'Parallel agent execution (6 agents)', values: [true, true, false, false, false] },
+    { feature: 'VS Code fork (full extension support)', values: [true, true, true, true, false] },
+    { feature: 'Free to use', values: [true, true, '$20/mo', '$15/mo', '$17/mo'] },
 ]
 
 export const PLATFORMS: Platform[] = [

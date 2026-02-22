@@ -12,13 +12,6 @@ import { motion } from 'framer-motion'
 export default function Quote() {
     return (
         <section className="text-center py-[140px] px-[20px] relative overflow-hidden">
-            {/* decorative quote mark */}
-            <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] font-display text-[320px] max-md:text-[180px] text-red-muted opacity-30 leading-none pointer-events-none select-none"
-                aria-hidden="true"
-            >
-                &ldquo;
-            </div>
 
             <motion.div
                 className="relative z-[1]"
@@ -29,8 +22,7 @@ export default function Quote() {
             >
                 {/* quote text: display, 300, clamp(24px,4vw,44px), leading 1.4, max-w 800px, italic, mb 32px */}
                 <p className="font-display font-light text-[clamp(24px,4vw,44px)] leading-[1.4] max-w-[800px] mx-auto mb-[32px] italic text-text-DEFAULT">
-                    The first tool that doesn&apos;t ask me to trust the AI blind.
-                    I can see every decision. I can roll back anything. That&apos;s not a feature — that&apos;s engineering.
+                    The same input on the same codebase always produces the same output — a property no other AI code editor today can claim.
                 </p>
 
                 {/* quote attribution: mono, 12px, text-low, mb 40px */}

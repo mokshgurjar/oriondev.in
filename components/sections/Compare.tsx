@@ -1,56 +1,117 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { COMPARISON_COLS, COMPARISON_ROWS } from '@/lib/data'
 
-// Original: py 120px
-// .compare-table-wrapper: overflow-x auto
-// .compare-table: width 100%, border-collapse collapse, mono, 12px
-// th,td: padding 16px 20px, border 1px border, text-align center, white-space nowrap
-// th: 11px, uppercase, tracking 0.08em, text-mid, bg-2, font-weight 500
-// th.orion-header: red-bright
-// td:first-child: text-align left, text, 12px
-// tr:hover td: bg red-dim
-// .check: red-bright
-// .dash: text-low
-// Mobile: font-size 10px, th/td padding 10px 8px
+// Shared cell style
+const cellBase: React.CSSProperties = {
+    padding: '16px 20px',
+    border: '1px solid var(--color-border-DEFAULT)',
+    textAlign: 'center',
+    whiteSpace: 'nowrap',
+}
+
+function CompareRow({ row }: { row: (typeof COMPARISON_ROWS)[number] }) {
+    const [hovered, setHovered] = useState(false)
+
+    return (
+        <tr
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            {/* td:first-child — text-align left, text, 12px */}
+            <td
+                style={{
+                    ...cellBase,
+                    textAlign: 'left',
+                    color: 'var(--color-text-DEFAULT)',
+                    fontSize: '12px',
+                    background: hovered ? 'var(--color-red-dim)' : 'transparent',
+                }}
+            >
+                {row.feature}
+            </td>
+            {row.values.map((val, i) => (
+                <td
+                    key={i}
+                    style={{
+                        ...cellBase,
+                        background: hovered ? 'var(--color-red-dim)' : 'transparent',
+                    }}
+                >
+                    {val === true ? (
+                        /* .check: red-bright */
+                        <span style={{ color: 'var(--color-red-bright)' }}>✦</span>
+                    ) : val === false ? (
+                        /* .dash: text-low */
+                        <span style={{ color: 'var(--color-text-low)' }}>—</span>
+                    ) : (
+                        <span style={{ color: 'var(--color-text-mid)' }}>{val}</span>
+                    )}
+                </td>
+            ))}
+        </tr>
+    )
+}
 
 export default function Compare() {
     return (
-        <section id="compare" className="py-[120px] bg-bg-2">
-            <div className="w-[90%] max-w-[1200px] mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.7 }}
-                >
-                    <SectionEyebrow>Competitive landscape</SectionEyebrow>
-                    <SectionTitle subtitle="Every feature below is exclusive to Orion unless explicitly marked otherwise.">
-                        How Orion compares.
-                    </SectionTitle>
-                </motion.div>
+        <section
+            id="compare"
+            style={{ padding: '120px 0', background: 'var(--color-bg)' }}
+        >
+            <div style={{ width: '90%', maxWidth: '1200px', margin: '0 auto' }}>
 
-                {/* compare-table-wrapper: overflow-x auto */}
-                <motion.div
-                    className="overflow-x-auto"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                >
-                    <table className="w-full border-collapse font-mono text-[12px] max-md:text-[10px]">
+                <SectionEyebrow>Honest comparison</SectionEyebrow>
+                <SectionTitle>
+                    How Orion stacks up.
+                </SectionTitle>
+
+                {/* .compare-table-wrapper: overflow-x auto */}
+                <div style={{ overflowX: 'auto' }}>
+                    {/* .compare-table: width 100%, border-collapse collapse, mono, 12px */}
+                    <table
+                        style={{
+                            width: '100%',
+                            borderCollapse: 'collapse',
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '12px',
+                        }}
+                    >
                         <thead>
                             <tr>
-                                {/* empty first header */}
-                                <th className="text-[11px] uppercase tracking-[0.08em] text-text-mid bg-bg-2 font-[500] px-[20px] py-[16px] border border-border text-center whitespace-nowrap max-md:px-[8px] max-md:py-[10px]" />
+                                {/* first header — "Feature" label */}
+                                <th
+                                    style={{
+                                        ...cellBase,
+                                        fontSize: '11px',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.08em',
+                                        color: 'var(--color-text-mid)',
+                                        background: 'var(--color-bg-2)',
+                                        fontWeight: 500,
+                                        textAlign: 'left',
+                                    }}
+                                >
+                                    Feature
+                                </th>
                                 {COMPARISON_COLS.map((col) => (
                                     <th
                                         key={col}
-                                        className={`text-[11px] uppercase tracking-[0.08em] bg-bg-2 font-[500] px-[20px] py-[16px] border border-border text-center whitespace-nowrap max-md:px-[8px] max-md:py-[10px] ${col === 'Orion' ? 'text-red-bright' : 'text-text-mid'
-                                            }`}
+                                        style={{
+                                            ...cellBase,
+                                            fontSize: '11px',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.08em',
+                                            /* th.orion-header: red-bright */
+                                            color: col === 'Orion'
+                                                ? 'var(--color-red-bright)'
+                                                : 'var(--color-text-mid)',
+                                            background: 'var(--color-bg-2)',
+                                            fontWeight: 500,
+                                        }}
                                     >
                                         {col}
                                     </th>
@@ -59,29 +120,12 @@ export default function Compare() {
                         </thead>
                         <tbody>
                             {COMPARISON_ROWS.map((row) => (
-                                <tr key={row.feature} className="group">
-                                    <td className="text-left text-text-DEFAULT text-[12px] px-[20px] py-[16px] border border-border whitespace-nowrap group-hover:bg-red-dim max-md:px-[8px] max-md:py-[10px]">
-                                        {row.feature}
-                                    </td>
-                                    {row.values.map((val, i) => (
-                                        <td
-                                            key={i}
-                                            className="text-center px-[20px] py-[16px] border border-border whitespace-nowrap group-hover:bg-red-dim max-md:px-[8px] max-md:py-[10px]"
-                                        >
-                                            {val === true ? (
-                                                <span className="text-red-bright">✦</span>
-                                            ) : val === false ? (
-                                                <span className="text-text-low">—</span>
-                                            ) : (
-                                                <span className="text-text-mid">{val}</span>
-                                            )}
-                                        </td>
-                                    ))}
-                                </tr>
+                                <CompareRow key={row.feature} row={row} />
                             ))}
                         </tbody>
                     </table>
-                </motion.div>
+                </div>
+
             </div>
         </section>
     )

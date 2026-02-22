@@ -1,73 +1,77 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import SectionEyebrow from '@/components/ui/SectionEyebrow'
-import SectionTitle from '@/components/ui/SectionTitle'
-
-// Original .reasons-grid: grid 3-col, gap 60px
-// Mobile: grid 1-col, gap 48px
-// .reason-num: display font, weight 300, 64px, red-deep, line-height 1, mb 16px
-// .reason-title: display font, weight 400, 22px, mb 12px, text
-// .reason-desc: 12px, text-mid, line-height 1.8
-
 const REASONS = [
     {
         num: '01',
-        title: 'Non-determinism is a defect.',
-        desc: "Run the same prompt on the same codebase twice in any other AI editor. You'll get two different results. That makes testing, auditing, and trusting AI output impossible. Orion's pipeline is mathematically deterministic.",
+        title: 'Same output, every time.',
+        desc: "No other AI editor is deterministic. Orion runs the same 15-stage pipeline on every prompt. The result is always identical.",
     },
     {
         num: '02',
-        title: 'Suggestions are not safety nets.',
-        desc: "AI linters suggest. Orion enforces. Six independent validation layers — Syntax, Type, Security, Performance, Integration, Formal — must all pass before any file is written. One failure blocks the entire change.",
+        title: 'Six hard validation layers.',
+        desc: "Every change is blocked until it passes Syntax, Type, Security, Performance, Integration, and Formal checks. Nothing slips through.",
     },
     {
         num: '03',
-        title: 'Undo is not rollback.',
-        desc: "Ctrl+Z can't undo a cross-file refactor that corrupted shared state. Orion's Atomic Executor applies changes as immutable transactions. Every checkpoint is a complete, restorable snapshot.",
+        title: 'You control the cost.',
+        desc: " Before any agent runs, Orion shows you the token cost. Adjust, approve, go. No surprise bills.",
     },
 ]
 
 export default function Reasons() {
     return (
-        <section className="py-[120px] bg-bg-2">
-            <div className="w-[90%] max-w-[1200px] mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.7 }}
-                >
-                    <SectionEyebrow>Why this exists</SectionEyebrow>
-                    <SectionTitle subtitle="Three problems that every AI code editor ignores.">
-                        We didn&apos;t build Orion to compete.<br />
-                        We built it because the category is broken.
-                    </SectionTitle>
-                </motion.div>
+        <section style={{ padding: '120px 0', background: 'var(--color-bg-2)' }}>
+            <div style={{ width: '90%', maxWidth: '1200px', margin: '0 auto' }}>
 
-                {/* reasons-grid: 3-col desktop, 1-col mobile, gap 60px/48px */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[48px] md:gap-[60px]">
-                    {REASONS.map((reason, i) => (
-                        <motion.div
-                            key={reason.num}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-80px' }}
-                            transition={{ duration: 0.7, delay: i * 0.1, ease: 'easeOut' }}
-                        >
-                            {/* reason-num: display, weight 300, 64px, red-deep, leading 1, mb 16px */}
-                            <div className="font-display font-light text-[64px] text-red-deep leading-none mb-[16px]">
+                {/* .reasons-grid: 3-col, gap 60px */}
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(3, 1fr)',
+                        gap: '60px',
+                    }}
+                    className="max-md:!grid-cols-1 max-md:!gap-[48px]"
+                >
+                    {REASONS.map((reason) => (
+                        <div key={reason.num}>
+                            {/* .reason-num: display, weight 300, 64px, red-deep, line-height 1, mb 16px */}
+                            <div
+                                style={{
+                                    fontFamily: 'var(--font-display)',
+                                    fontSize: '64px',
+                                    fontWeight: 300,
+                                    color: 'var(--color-red-deep)',
+                                    lineHeight: 1,
+                                    marginBottom: '16px',
+                                }}
+                            >
                                 {reason.num}
                             </div>
-                            {/* reason-title: display, weight 400, 22px, mb 12px */}
-                            <h3 className="font-display font-[400] text-[22px] mb-[12px] text-text-DEFAULT">
+
+                            {/* .reason-title: display, weight 400, 22px, mb 12px */}
+                            <h3
+                                style={{
+                                    fontFamily: 'var(--font-display)',
+                                    fontWeight: 400,
+                                    fontSize: '22px',
+                                    marginBottom: '12px',
+                                    color: 'var(--color-text-DEFAULT)',
+                                }}
+                            >
                                 {reason.title}
                             </h3>
-                            {/* reason-desc: 12px, text-mid, leading 1.8 */}
-                            <p className="text-[12px] text-text-mid leading-[1.8]">
+
+                            {/* .reason-desc: 12px, text-mid, line-height 1.8 */}
+                            <p
+                                style={{
+                                    fontSize: '12px',
+                                    color: 'var(--color-text-mid)',
+                                    lineHeight: 1.8,
+                                }}
+                            >
                                 {reason.desc}
                             </p>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>

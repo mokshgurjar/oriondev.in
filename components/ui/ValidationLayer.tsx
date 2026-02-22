@@ -1,25 +1,63 @@
-import type { ValidationLayer } from '@/types'
+'use client'
 
-// Original .validation-cell: bg-card, border 1px border, padding 36px 28px, transition bg 0.3s
-// :hover: bg red-dim
-// .validation-num: display font, weight 300, 48px, red-deep, line-height 1, mb 12px
-// .validation-name: mono, 12px, uppercase, tracking 0.1em, text, mb 10px
-// .validation-desc: mono, 11px, text-mid, line-height 1.7
+import { useState } from 'react'
+import type { ValidationLayer } from '@/types'
 
 interface ValidationLayerProps {
     layer: ValidationLayer
 }
 
-export default function ValidationLayer({ layer }: ValidationLayerProps) {
+export default function ValidationLayerComponent({ layer }: ValidationLayerProps) {
+    const [hovered, setHovered] = useState(false)
+
     return (
-        <div className="bg-bg-card border border-border py-[36px] px-[28px] transition-[background] duration-300 hover:bg-red-dim">
-            <div className="font-display font-light text-[48px] text-red-deep leading-none mb-[12px]">
+        <div
+            style={{
+                background: hovered ? 'var(--color-red-dim)' : 'var(--color-bg-card)',
+                border: '1px solid var(--color-border-DEFAULT)',
+                padding: '36px 28px',
+                transition: 'background 0.3s',
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            {/* .validation-num: display, weight 300, 48px, red-deep, line-height 1, mb 12px */}
+            <div
+                style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 300,
+                    fontSize: '48px',
+                    color: 'var(--color-red-deep)',
+                    lineHeight: 1,
+                    marginBottom: '12px',
+                }}
+            >
                 {layer.num}
             </div>
-            <div className="font-mono text-[12px] uppercase tracking-[0.1em] text-text-DEFAULT mb-[10px]">
+
+            {/* .validation-name: mono, 12px, uppercase, tracking 0.1em, text, mb 10px */}
+            <div
+                style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    color: 'var(--color-text-DEFAULT)',
+                    marginBottom: '10px',
+                }}
+            >
                 {layer.name}
             </div>
-            <div className="font-mono text-[11px] text-text-mid leading-[1.7]">
+
+            {/* .validation-desc: mono, 11px, text-mid, line-height 1.7 */}
+            <div
+                style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--color-text-mid)',
+                    lineHeight: 1.7,
+                }}
+            >
                 {layer.desc}
             </div>
         </div>
