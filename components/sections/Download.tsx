@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { PLATFORMS } from '@/lib/data'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
+import Image from 'next/image'
 
-const iconMap: Record<string, string> = {
-    Windows: '⊞',
-    macOS: '⌘',
-    Linux: '⬡',
+const iconMap: Record<string, React.ReactNode> = {
+    Windows: <Image src="/microsoft.png" alt="Windows Logo" width={40} height={40} className="object-contain p-2.5 w-full h-full brightness-0 invert" />,
+    macOS: <Image src="/apple-logo.png" alt="Apple Logo" width={40} height={40} className="object-contain p-1 w-full h-full brightness-0 invert" />,
+    Linux: <Image src="/linux.png" alt="Linux Logo" width={40} height={40} className="object-contain w-full h-full brightness-0 invert" />,
 }
 
 const envUrlMap: Record<string, string | undefined> = {
@@ -20,7 +21,7 @@ import HighlightCard from '@/components/ui/highlight-card'
 
 function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
     const [btnHovered, setBtnHovered] = useState(false)
-    const icon = iconMap[platform.os] || '⬡'
+    const icon = iconMap[platform.os] || <Image src="/linux.png" alt="Linux Logo" width={40} height={40} className="object-contain w-full h-full brightness-0 invert" />
     const downloadUrl = envUrlMap[platform.os] || '#'
 
     return (
@@ -29,7 +30,7 @@ function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
             description={[
                 `${platform.arch}`
             ]}
-            icon={<span style={{ fontSize: '36px', color: 'var(--color-text-DEFAULT)' }}>{icon}</span>}
+            icon={<div className="flex items-center justify-center w-14 h-14 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">{icon}</div>}
         >
             <a
                 href={downloadUrl}

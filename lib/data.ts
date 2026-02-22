@@ -130,6 +130,7 @@ export const TRUST_FACTS: TrustFact[] = [
 ]
 
 export const NAV_LINKS = [
+    { label: 'Home', href: '#' },
     { label: 'Features', href: '#features' },
     { label: 'Pipeline', href: '#pipeline' },
     { label: 'Compare', href: '#compare' },

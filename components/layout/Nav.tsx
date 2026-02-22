@@ -33,8 +33,10 @@ export default function Nav() {
                 }
             }
             
-            // If we're at the very top and no section is <= 300px yet, just highlight the first one
-            if (!currentTab) {
+            // If we're at or near the very top of the page (e.g., above the feature section), lock to Home
+            if (window.scrollY < 400) {
+                currentTab = NAV_LINKS[0].label; // "Home"
+            } else if (!currentTab) {
                 currentTab = NAV_LINKS[0].label;
             }
             
