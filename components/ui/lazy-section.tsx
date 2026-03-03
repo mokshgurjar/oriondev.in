@@ -12,25 +12,17 @@ export default function LazySection({ children, fallback }: LazySectionProps) {
   // Use framer-motion's useInView to quickly evaluate mounting context
   const ref = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
-  
+
   // margin controls how early the item mounts.
   const isInView = useInView(ref, { margin: "400px 0px 400px 0px" })
 
   useEffect(() => {
-    let timer: NodeJS.Timeout
-    
-    if (isInView) {
-      // Simulate network request/render delay so skeletons are visible even if cached
-      timer = setTimeout(() => {
-        setMounted(true)
-      }, 500)
-    } else {
-      // Unmount completely when scrolled away so the effect triggers again when reverse scrolling
-      setMounted(false)
+    if (isInView && !mounted) {
+      setMounted(true)
     }
-    
-    return () => clearTimeout(timer)
-  }, [isInView])
+    // We intentionally do not setMounted(false) when scrolled away 
+    // to prevent the "pop-in" effect from resetting.
+  }, [isInView, mounted])
 
   return (
     <div ref={ref}>

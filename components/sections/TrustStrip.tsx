@@ -16,9 +16,9 @@ import { TRUST_FACTS } from '@/lib/data'
 export default function TrustStrip() {
     return (
         <section className="bg-bg-2 py-[48px] [padding:48px_0]">
-            <div className="w-[90%] max-w-[1200px] mx-auto">
+            <div className="w-[95%] max-w-[1400px] mx-auto overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <motion.div
-                    className="flex justify-center items-center flex-wrap"
+                    className="flex justify-center items-center max-md:flex-wrap"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

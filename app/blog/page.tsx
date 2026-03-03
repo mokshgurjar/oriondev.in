@@ -6,7 +6,7 @@ import BlogHero from '@/components/sections/BlogHero'
 
 const ExecutionModes = dynamic(() => import('@/components/sections/ExecutionModes'))
 const Mcp = dynamic(() => import('@/components/sections/Mcp'))
-const Pipeline = dynamic(() => import('@/components/sections/Pipeline'))
+const Compare = dynamic(() => import('@/components/sections/Compare'))
 const Reasons = dynamic(() => import('@/components/sections/Reasons'))
 const Footer = dynamic(() => import('@/components/layout/Footer'))
 
@@ -30,7 +30,7 @@ export default function BlogPage() {
             </LazySection>
 
             <LazySection fallback={<GenericSectionSkeleton />}>
-                <Pipeline />
+                <Compare />
             </LazySection>
 
             <LazySection fallback={<GenericSectionSkeleton />}>
