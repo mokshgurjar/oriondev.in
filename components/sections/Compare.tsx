@@ -4,6 +4,7 @@ import { useState } from 'react'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { COMPARISON_COLS, COMPARISON_ROWS } from '@/lib/data'
+import { cn } from '@/lib/utils'
 
 // Shared cell style
 const cellBase: React.CSSProperties = {
@@ -60,7 +61,7 @@ export default function Compare() {
     return (
         <section
             id="compare"
-            style={{ padding: '120px 0', background: 'var(--color-bg)' }}
+            style={{ padding: '120px 0' }}
         >
             <div style={{ width: '90%', maxWidth: '1200px', margin: '0 auto' }}>
 
@@ -69,8 +70,23 @@ export default function Compare() {
                     How Orion stacks up.
                 </SectionTitle>
 
-                {/* .compare-table-wrapper: overflow-x auto */}
-                <div style={{ overflowX: 'auto' }}>
+                {/* .compare-table-wrapper: overflow-hidden, rounded styling */}
+                <div
+                    className={cn(
+                        "overflow-x-auto rounded-xl bg-bg-card",
+                        "transition-all duration-300"
+                    )}
+                    style={{
+                        border: '1px solid var(--color-border-DEFAULT)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--color-red-deep)'
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--color-border-DEFAULT)'
+                    }}
+                >
                     {/* .compare-table: width 100%, border-collapse collapse, mono, 12px */}
                     <table
                         style={{
@@ -90,14 +106,16 @@ export default function Compare() {
                                         textTransform: 'uppercase',
                                         letterSpacing: '0.08em',
                                         color: 'var(--color-text-mid)',
-                                        background: 'var(--color-bg-2)',
+                                        background: 'transparent',
                                         fontWeight: 500,
                                         textAlign: 'left',
+                                        borderTop: 'none',
+                                        borderLeft: 'none',
                                     }}
                                 >
                                     Feature
                                 </th>
-                                {COMPARISON_COLS.map((col) => (
+                                {COMPARISON_COLS.map((col, i) => (
                                     <th
                                         key={col}
                                         style={{
@@ -109,8 +127,10 @@ export default function Compare() {
                                             color: col === 'Orion'
                                                 ? 'var(--color-red-bright)'
                                                 : 'var(--color-text-mid)',
-                                            background: 'var(--color-bg-2)',
+                                            background: 'transparent',
                                             fontWeight: 500,
+                                            borderTop: 'none',
+                                            borderRight: i === COMPARISON_COLS.length - 1 ? 'none' : '1px solid var(--color-border-DEFAULT)',
                                         }}
                                     >
                                         {col}

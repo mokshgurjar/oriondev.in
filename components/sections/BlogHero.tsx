@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function BlogHero() {
     const containerVariants: Variants = {
@@ -41,10 +42,15 @@ export default function BlogHero() {
                 <motion.div variants={itemVariants} className="mb-12">
                     <Link
                         href="/"
-                        className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-DEFAULT bg-bg/50 backdrop-blur-sm transition-all duration-300 hover:border-red-muted hover:bg-red-core/5"
+                        className={cn(
+                            "group inline-flex items-center gap-2 px-4 py-2 rounded-full",
+                            "border border-border-DEFAULT bg-bg-card",
+                            "transition-all duration-300 hover:border-red-deep hover:bg-red-dim",
+                            "shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+                        )}
                     >
-                        <ArrowLeft className="w-3 h-3 text-text-low group-hover:text-red-bright transition-colors" />
-                        <span className="font-mono text-[11px] uppercase tracking-widest text-text-low group-hover:text-text-mid transition-colors">
+                        <ArrowLeft className="w-3.5 h-3.5 text-text-low group-hover:text-red-bright transition-colors" />
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
                             Back to Home
                         </span>
                     </Link>

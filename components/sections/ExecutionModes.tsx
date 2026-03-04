@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
 import SectionTitle from '@/components/ui/SectionTitle'
+import { cn } from '@/lib/utils'
 
 const planningFeatures = [
     'Intent Interpreter → IISG Contract',
@@ -45,10 +46,22 @@ export default function ExecutionModes() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-80px' }}
                         transition={{ duration: 0.7, delay: 0.08 }}
+                        className={cn(
+                            "relative flex flex-col overflow-hidden rounded-xl bg-bg-card group",
+                            "transition-all duration-300",
+                            "p-[32px]"
+                        )}
                         style={{
                             border: '1px solid var(--color-border-DEFAULT)',
-                            background: 'var(--color-bg-card)',
-                            padding: '32px',
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'var(--color-red-dim)'
+                            e.currentTarget.style.borderColor = 'var(--color-red-deep)'
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'var(--color-bg-card)'
+                            e.currentTarget.style.borderColor = 'var(--color-border-DEFAULT)'
                         }}
                     >
                         {/* Card header row */}
@@ -155,10 +168,22 @@ export default function ExecutionModes() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-80px' }}
                         transition={{ duration: 0.7, delay: 0.16 }}
+                        className={cn(
+                            "relative flex flex-col overflow-hidden rounded-xl bg-bg-card group",
+                            "transition-all duration-300",
+                            "p-[32px]"
+                        )}
                         style={{
                             border: '1px solid var(--color-border-DEFAULT)',
-                            background: 'var(--color-bg-card)',
-                            padding: '32px',
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'var(--color-red-dim)'
+                            e.currentTarget.style.borderColor = 'var(--color-red-deep)'
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'var(--color-bg-card)'
+                            e.currentTarget.style.borderColor = 'var(--color-border-DEFAULT)'
                         }}
                     >
                         {/* Card header row */}

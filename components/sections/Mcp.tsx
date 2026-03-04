@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
 import SectionTitle from '@/components/ui/SectionTitle'
+import { cn } from '@/lib/utils'
 
 const pillars = [
     {
@@ -46,11 +47,22 @@ export default function Mcp() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.7, delay: 0.1 }}
+                    className={cn(
+                        "relative flex flex-col overflow-hidden rounded-xl bg-bg-card",
+                        "transition-all duration-300",
+                        "px-[36px] py-[32px] mb-[80px]"
+                    )}
                     style={{
                         border: '1px solid var(--color-border-DEFAULT)',
-                        padding: '32px 36px',
-                        margin: '0 0 80px 0',
-                        background: 'var(--color-bg-card)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'var(--color-red-dim)'
+                        e.currentTarget.style.borderColor = 'var(--color-red-deep)'
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'var(--color-bg-card)'
+                        e.currentTarget.style.borderColor = 'var(--color-border-DEFAULT)'
                     }}
                 >
                     <p
@@ -67,7 +79,7 @@ export default function Mcp() {
                 </motion.blockquote>
 
                 {/* Three pillars */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-0" style={{ border: '1px solid var(--color-border-DEFAULT)' }}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
                     {pillars.map((pillar, i) => (
                         <motion.div
                             key={pillar.num}
@@ -75,16 +87,24 @@ export default function Mcp() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-80px' }}
                             transition={{ duration: 0.7, delay: i * 0.08 }}
-                            className="group"
+                            className={cn(
+                                "relative flex flex-col overflow-hidden rounded-xl bg-bg-card group",
+                                "transition-all duration-300",
+                                "px-[28px] py-[36px]"
+                            )}
                             style={{
-                                background: 'var(--color-bg-card)',
-                                borderRight: i < pillars.length - 1 ? '1px solid var(--color-border-DEFAULT)' : 'none',
-                                padding: '36px 28px',
-                                transition: 'background 0.3s',
-                                cursor: 'default',
+                                border: '1px solid var(--color-border-DEFAULT)',
+                                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+                                cursor: 'default'
                             }}
-                            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-red-dim)' }}
-                            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-bg-card)' }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.background = 'var(--color-red-dim)'
+                                e.currentTarget.style.borderColor = 'var(--color-red-deep)'
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.background = 'var(--color-bg-card)'
+                                e.currentTarget.style.borderColor = 'var(--color-border-DEFAULT)'
+                            }}
                         >
                             {/* Number */}
                             <p
