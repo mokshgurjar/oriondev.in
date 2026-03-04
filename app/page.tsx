@@ -5,9 +5,7 @@ import LazySection from '@/components/ui/lazy-section'
 
 // import skeletal loaders
 import {
-  DownloadSkeleton,
   FeaturesSkeleton,
-  CompareSkeleton,
   GenericSectionSkeleton
 } from '@/components/ui/section-skeletons'
 
