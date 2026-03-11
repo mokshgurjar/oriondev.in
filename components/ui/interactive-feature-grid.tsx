@@ -62,7 +62,7 @@ export default function InteractiveFeatureGrid() {
   }, []);
 
   return (
-    <div className="w-full mt-12 font-mono text-text-DEFAULT relative">
+    <div className="w-full mt-12 font-ui text-text-DEFAULT relative">
 
       {/* Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -78,7 +78,7 @@ export default function InteractiveFeatureGrid() {
               key={id}
               onClick={() => setSelectedId(id)}
               transition={springTransition}
-              className="cursor-pointer bg-[#0f0f11] rounded-[24px] overflow-hidden group border border-[#1a1a1d] hover:border-red-core/50 transition-colors shadow-lg"
+              className="cursor-pointer bg-[#030101] rounded-[24px] overflow-hidden group border border-white/10 hover:border-red-core/50 transition-colors shadow-lg"
             >
               {/* Card Content */}
               <div className="p-8 flex items-center gap-5">
@@ -123,14 +123,14 @@ export default function InteractiveFeatureGrid() {
                   layoutId={`card-${id}`}
                   transition={springTransition}
                   key="modal"
-                  className="bg-[#121214] rounded-[32px] overflow-hidden w-full max-w-2xl relative z-10 border border-border-DEFAULT shadow-[0_0_80px_rgba(229,48,48,0.05)] p-10"
+                  className="bg-[#050202] rounded-[32px] overflow-hidden w-full max-w-2xl relative z-10 border border-white/10 shadow-[0_0_80px_rgba(229,48,48,0.05)] p-10"
                 >
                   <div className="flex items-center gap-5 mb-8">
                     <div className="p-4 bg-red-core/10 text-red-bright border border-red-core/20 shadow-[0_0_20px_rgba(229,48,48,0.1)] rounded-[16px] shrink-0">
                       {assets.icon}
                     </div>
                     <div>
-                      <motion.h3 layoutId={`title-${id}`} transition={springTransition} className="text-3xl font-display font-medium text-text-DEFAULT">
+                      <motion.h3 layoutId={`title-${id}`} transition={springTransition} className="text-3xl font-display font-light text-text-DEFAULT">
                         {feature.title}
                       </motion.h3>
                     </div>
@@ -142,7 +142,7 @@ export default function InteractiveFeatureGrid() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ delay: 0.15, duration: 0.4, ease: "easeOut" }}
-                    className="space-y-5 border-t border-[#1a1a1d] pt-8"
+                    className="space-y-5 border-t border-[#110707] pt-8"
                   >
                     <li className="text-text-low flex items-start gap-4 text-[14px] leading-relaxed">
                       <div className="w-1.5 h-1.5 bg-red-core rounded-full mt-2 shrink-0 shadow-[0_0_10px_rgba(229,48,48,0.5)]" />

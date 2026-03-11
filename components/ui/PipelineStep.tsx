@@ -48,7 +48,7 @@ export default function PipelineStepComponent({
             {/* .pipeline-step-name: mono, 11px, text */}
             <div
                 style={{
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-ui)',
                     fontSize: '11px',
                     color: 'var(--color-text-DEFAULT)',
                 }}

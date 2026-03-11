@@ -1,21 +1,25 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Geist_Mono } from 'next/font/google'
+import { Playfair_Display, Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import GrainOverlay from '@/components/ui/GrainOverlay'
 import CursorWrapper from '@/components/ui/CursorWrapper'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
-const geistMono = Geist_Mono({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
   display: 'swap',
 })
 
@@ -45,7 +49,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}>
         <GrainOverlay />
         <CursorWrapper />
         {children}

@@ -50,7 +50,7 @@ export default function BlogHero() {
                         )}
                     >
                         <ArrowLeft className="w-3.5 h-3.5 text-text-low group-hover:text-red-bright transition-colors" />
-                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
+                        <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
                             Back to Home
                         </span>
                     </Link>
@@ -65,12 +65,21 @@ export default function BlogHero() {
                 </motion.p>
 
                 {/* Main heading */}
-                <motion.h1
+                <motion.h1 
                     variants={itemVariants}
-                    className="font-display font-light text-balance text-[clamp(40px,6vw,80px)] leading-[1.05] tracking-tight mb-8 text-text-DEFAULT"
+                    className="font-display font-light text-balance text-[clamp(40px,6vw,80px)] leading-[1.05] tracking-tight mb-8 text-text-DEFAULT text-glow-red"
                 >
                     See how Orion{' '}
-                    <span className="italic font-normal bg-gradient-to-r from-red-bright via-red-core to-red-bright bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient_3s_ease-in-out_infinite]">
+                    <span 
+                        className="text-gradient-red"
+                        style={{ 
+                            fontStyle: 'italic', 
+                            fontFamily: 'var(--font-display)', 
+                            display: 'inline-block',
+                            paddingRight: '0.15em',
+                            paddingBottom: '0.1em',
+                        }}
+                    >
                         actually
                     </span>{' '}
                     works.
@@ -79,7 +88,7 @@ export default function BlogHero() {
                 {/* Subtitle */}
                 <motion.p
                     variants={itemVariants}
-                    className="font-mono text-[14px] text-text-mid leading-relaxed max-w-2xl text-balance"
+                    className="font-ui text-[14px] text-text-mid leading-relaxed max-w-2xl text-balance"
                 >
                     The 15-stage pipeline. Two execution modes. MCP integration from the inside.
                     <br className="hidden sm:block" />

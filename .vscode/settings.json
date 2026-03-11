@@ -1,0 +1,4 @@
+{
+    "workbench.editor.showTabs": "multiple",
+    "css.lint.unknownAtRules": "ignore"
+}

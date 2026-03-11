@@ -127,8 +127,8 @@ export default function ExecutionModes() {
                         {/* Description */}
                         <p
                             style={{
-                                fontFamily: 'var(--font-mono)',
-                                fontSize: '12px',
+                                fontFamily: 'var(--font-ui)',
+                                fontSize: '13px',
                                 color: 'var(--color-text-mid)',
                                 lineHeight: 1.7,
                                 marginBottom: '28px',
@@ -147,8 +147,8 @@ export default function ExecutionModes() {
                                 <li
                                     key={f}
                                     style={{
-                                        fontFamily: 'var(--font-mono)',
-                                        fontSize: '12px',
+                                        fontFamily: 'var(--font-ui)',
+                                        fontSize: '13px',
                                         color: 'var(--color-text-mid)',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -237,8 +237,8 @@ export default function ExecutionModes() {
                         {/* Description */}
                         <p
                             style={{
-                                fontFamily: 'var(--font-mono)',
-                                fontSize: '12px',
+                                fontFamily: 'var(--font-ui)',
+                                fontSize: '13px',
                                 color: 'var(--color-text-mid)',
                                 lineHeight: 1.7,
                                 marginBottom: '28px',
@@ -257,8 +257,8 @@ export default function ExecutionModes() {
                                 <li
                                     key={f}
                                     style={{
-                                        fontFamily: 'var(--font-mono)',
-                                        fontSize: '12px',
+                                        fontFamily: 'var(--font-ui)',
+                                        fontSize: '13px',
                                         color: 'var(--color-text-mid)',
                                         display: 'flex',
                                         alignItems: 'center',

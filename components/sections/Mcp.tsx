@@ -67,8 +67,8 @@ export default function Mcp() {
                 >
                     <p
                         style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '13px',
+                            fontFamily: 'var(--font-ui)',
+                            fontSize: '15px',
                             color: 'var(--color-text-DEFAULT)',
                             lineHeight: 1.8,
                             marginBottom: '0',
@@ -123,8 +123,8 @@ export default function Mcp() {
                             {/* Label */}
                             <p
                                 style={{
-                                    fontFamily: 'var(--font-mono)',
-                                    fontSize: '12px',
+                                    fontFamily: 'var(--font-ui)',
+                                    fontSize: '13px',
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.1em',
                                     color: 'var(--color-text-DEFAULT)',

@@ -111,7 +111,7 @@ export default function Nav() {
                                 <Link
                                     href={link.href}
                                     onClick={() => setActiveTab(link.label)}
-                                    className={`relative px-1 py-4 font-mono text-[12px] uppercase tracking-[0.08em] transition-colors outline-none block ${
+                                    className={`relative px-1 py-4 font-ui text-[12px] uppercase tracking-[0.08em] transition-colors outline-none block ${
                                         isActive ? "text-text-DEFAULT" : "text-text-mid hover:text-text-DEFAULT"
                                     }`}
                                     style={{ textDecoration: 'none' }}
@@ -139,26 +139,18 @@ export default function Nav() {
                 {/* nav-cta */}
                 <Link
                     href="/auth"
+                    className="btn-nav transition-all duration-200 ease-in-out"
                     style={{
-                        fontFamily: 'var(--font-mono)',
+                        fontFamily: 'var(--font-ui)',
                         fontSize: '12px',
                         padding: '8px 22px',
                         border: '1px solid var(--color-red-core)',
                         color: 'var(--color-red-bright)',
                         textTransform: 'uppercase',
                         letterSpacing: '0.06em',
-                        transition: 'background 0.3s, color 0.3s',
                         display: 'inline-block',
                         borderRadius: '100px',
                         textDecoration: 'none',
-                    }}
-                    onMouseEnter={e => {
-                        e.currentTarget.style.background = 'var(--color-red-core)'
-                        e.currentTarget.style.color = 'var(--color-text-DEFAULT)'
-                    }}
-                    onMouseLeave={e => {
-                        e.currentTarget.style.background = 'transparent'
-                        e.currentTarget.style.color = 'var(--color-red-bright)'
                     }}
                 >
                     Stay Informed

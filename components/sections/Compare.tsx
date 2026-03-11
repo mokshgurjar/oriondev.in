@@ -92,8 +92,8 @@ export default function Compare() {
                         style={{
                             width: '100%',
                             borderCollapse: 'collapse',
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '12px',
+                            fontFamily: 'var(--font-ui)',
+                            fontSize: '13px',
                         }}
                     >
                         <thead>

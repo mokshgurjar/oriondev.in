@@ -20,7 +20,7 @@ export default function Hero() {
         if (typeof navigator !== 'undefined') {
             let detected = 'Unknown'
             if ('userAgentData' in navigator) {
-                detected = (navigator as Navigator & { userAgentData?: { platform: string } }).userAgentData?.platform || 'Unknown'
+                detected = (navigator as unknown as { userAgentData?: { platform: string } }).userAgentData?.platform || 'Unknown'
             }
 
             if (detected === 'Unknown' || !detected) {
@@ -29,7 +29,9 @@ export default function Hero() {
                 else if (ua.includes('mac')) detected = 'macOS'
                 else if (ua.includes('linux')) detected = 'Linux'
             }
-            setTimeout(() => setOsName(detected), 0)
+            setTimeout(() => {
+                setOsName(detected)
+            }, 0)
         }
     }, [])
 
@@ -80,7 +82,7 @@ export default function Hero() {
 
             {/* h1 — will-fade gets hero-fade class after mount */}
             <h1
-                className="will-fade"
+                className="will-fade text-glow-red"
                 style={{
                     fontFamily: 'var(--font-display)',
                     fontWeight: 300,
@@ -92,7 +94,7 @@ export default function Hero() {
                 }}
             >
                 Built by developers.<br />
-                <span style={{ color: 'var(--color-red-bright)', fontStyle: 'italic' }}>
+                <span className="text-gradient-red" style={{ fontStyle: 'italic', fontFamily: 'var(--font-display)', display: 'inline-block' }}>
                     Evolved
                 </span>{' '}
                 by the community.
@@ -115,6 +117,7 @@ export default function Hero() {
                 <a
                     id="dynamic-download-btn"
                     href={btnHref}
+                    className="btn-primary"
                     style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -122,17 +125,21 @@ export default function Hero() {
                         padding: '16px 40px',
                         background: 'var(--color-red-core)',
                         color: 'var(--color-text-DEFAULT)',
-                        fontFamily: 'var(--font-mono)',
+                        fontFamily: 'var(--font-ui)',
                         fontSize: '14px',
                         textTransform: 'uppercase',
                         letterSpacing: '0.06em',
-                        transition: 'background 0.3s',
+                        transition: 'background 0.3s ease-in-out, transform 0.2s ease-in-out',
                         animation: 'ctaGlow 2.5s ease-in-out infinite',
                         borderRadius: '100px',
                         textDecoration: 'none',
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-red-bright)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = 'var(--color-red-core)')}
+                    onMouseEnter={e => {
+                        e.currentTarget.style.background = '#e84135'
+                    }}
+                    onMouseLeave={e => {
+                        e.currentTarget.style.background = 'var(--color-red-core)'
+                    }}
                 >
                     <span id="btn-text">{btnText}</span>
                 </a>
@@ -140,6 +147,7 @@ export default function Hero() {
                 {/* .btn-ghost */}
                 <a
                     href="/blog"
+                    className="btn-outline"
                     style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -147,11 +155,11 @@ export default function Hero() {
                         padding: '14px 32px',
                         border: '1px solid var(--color-red-core)',
                         color: 'var(--color-red-bright)',
-                        fontFamily: 'var(--font-mono)',
+                        fontFamily: 'var(--font-ui)',
                         fontSize: '13px',
                         textTransform: 'uppercase',
                         letterSpacing: '0.06em',
-                        transition: 'background 0.3s, color 0.3s',
+                        transition: 'background 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, transform 0.2s ease-in-out',
                         borderRadius: '100px',
                         textDecoration: 'none',
                         background: 'transparent',
@@ -159,10 +167,12 @@ export default function Hero() {
                     onMouseEnter={e => {
                         e.currentTarget.style.background = 'var(--color-red-core)'
                         e.currentTarget.style.color = 'var(--color-text-DEFAULT)'
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
                     }}
                     onMouseLeave={e => {
                         e.currentTarget.style.background = 'transparent'
                         e.currentTarget.style.color = 'var(--color-red-bright)'
+                        e.currentTarget.style.borderColor = 'var(--color-red-core)'
                     }}
                 >
                     See how it works →

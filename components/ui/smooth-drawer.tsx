@@ -80,7 +80,7 @@ export default function SmoothDrawer({
         <Drawer>
             <DrawerTrigger asChild>
                 <button
-                    className="w-auto px-8 py-[14px] border border-red-core text-red-bright font-mono text-[13px] uppercase tracking-[0.06em] bg-transparent hover:border-transparent hover:bg-white/5 hover:text-text-DEFAULT transition-all rounded-full cursor-pointer relative z-10"
+                    className="w-auto px-8 py-[14px] border border-red-core text-red-bright font-ui text-[13px] uppercase tracking-[0.06em] bg-transparent hover:border-transparent hover:bg-white/5 hover:text-text-DEFAULT transition-all rounded-full cursor-pointer relative z-10"
                 >
                     {triggerText}
                 </button>
@@ -105,7 +105,7 @@ export default function SmoothDrawer({
                                 </motion.span>
                             </DrawerTitle>
                             <motion.div variants={itemVariants as any}>
-                                <DrawerDescription className="text-sm text-text-mid text-center leading-relaxed font-mono mt-0">
+                                <DrawerDescription className="text-sm text-text-mid text-center leading-relaxed font-ui mt-0">
                                     {description}
                                 </DrawerDescription>
                             </motion.div>
@@ -116,7 +116,7 @@ export default function SmoothDrawer({
                         <DrawerFooter className="flex flex-col gap-3 px-2 pb-2">
                             <div className="flex flex-col gap-3 w-full">
                                 <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-red-bright to-red-core font-mono font-medium text-[13px] uppercase text-white tracking-widest shadow-lg shadow-red-core/20 transition-all duration-500 hover:from-red-500 hover:to-red-700 hover:shadow-red-core/40"
+                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-red-bright to-red-core font-ui font-medium text-[13px] uppercase text-white tracking-widest shadow-lg shadow-red-core/20 transition-all duration-500 hover:from-red-500 hover:to-red-700 hover:shadow-red-core/40"
                                     href="https://discord.com"
                                     target="_blank"
                                 >
@@ -124,7 +124,7 @@ export default function SmoothDrawer({
                                     Discord
                                 </Link>
                                 <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-900 font-mono font-medium text-[13px] uppercase text-white tracking-widest border border-zinc-700 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-800"
+                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-900 font-ui font-medium text-[13px] uppercase text-white tracking-widest border border-zinc-700 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-800"
                                     href="https://github.com"
                                     target="_blank"
                                 >
@@ -132,7 +132,7 @@ export default function SmoothDrawer({
                                     GitHub
                                 </Link>
                                 <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 font-mono font-medium text-[13px] uppercase text-white tracking-widest shadow-lg transition-all duration-500 hover:opacity-90"
+                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 font-ui font-medium text-[13px] uppercase text-white tracking-widest shadow-lg transition-all duration-500 hover:opacity-90"
                                     href="https://www.instagram.com/cogneoverse?igsh=NTFhMDRnbG9yOTNy"
                                     target="_blank"
                                 >
@@ -142,7 +142,7 @@ export default function SmoothDrawer({
                             </div>
                             <DrawerClose asChild>
                                 <button
-                                    className="mt-4 h-11 w-full rounded-xl border border-border-DEFAULT text-text-low font-mono text-[12px] uppercase tracking-widest transition-colors hover:bg-white/5 hover:text-text-mid"
+                                    className="mt-4 h-11 w-full rounded-xl border border-border-DEFAULT text-text-low font-ui text-[12px] uppercase tracking-widest transition-colors hover:bg-white/5 hover:text-text-mid"
                                 >
                                     Maybe Later
                                 </button>

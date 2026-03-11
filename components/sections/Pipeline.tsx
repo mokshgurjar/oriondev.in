@@ -51,7 +51,7 @@ export default function Pipeline() {
         return () => clearInterval(timer)
     }, [])
 
-    const radius = 260 // Distance of nodes from center
+    const radius = 320 // Distance of nodes from center
 
     return (
         <section id="pipeline" className="py-24 px-6 overflow-hidden">
@@ -81,7 +81,7 @@ export default function Pipeline() {
                 >
                     <motion.div
                         className="relative flex items-center justify-center pointer-events-none"
-                        style={{ width: '100%', maxWidth: 1100, height: 650 }}
+                        style={{ width: '100%', maxWidth: 1200, height: 800 }}
                         animate={{ y: [-8, 8, -8] }}
                         transition={{ duration: 7, ease: 'easeInOut', repeat: Infinity }}
                     >

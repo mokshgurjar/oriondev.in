@@ -9,11 +9,11 @@ interface SectionTitleProps {
 export default function SectionTitle({ children, subtitle }: SectionTitleProps) {
     return (
         <>
-            <h2 className="font-display font-light text-[clamp(32px,5vw,56px)] leading-[1.15] mb-[16px] text-text-DEFAULT">
+            <h2 className="font-display font-light text-[clamp(32px,5vw,56px)] leading-[1.15] mb-[16px] text-text-DEFAULT text-glow-red">
                 {children}
             </h2>
             {subtitle && (
-                <p className="font-mono text-[13px] text-text-mid max-w-[600px] leading-[1.7] mb-[60px]">
+                <p className="font-ui text-[13px] text-text-mid max-w-[600px] leading-[1.7] mb-[60px]">
                     {subtitle}
                 </p>
             )}

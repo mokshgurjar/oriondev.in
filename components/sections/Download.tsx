@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { PLATFORMS } from '@/lib/data'
 import SectionEyebrow from '@/components/ui/SectionEyebrow'
 import Image from 'next/image'
@@ -23,7 +23,7 @@ import { ReactNode } from 'react'
 
 const reqs: Record<string, ReactNode> = {
     Windows: (
-        <div className="text-gray-300 font-mono text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
+        <div className="text-gray-300 font-ui text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
             <h4 className="text-lg font-bold text-white mb-2 font-display text-center">Minimum Requirements</h4>
             <div className="flex flex-col gap-2">
                 <p><span className="text-red-bright">OS:</span> Windows 10/11 (64-bit)</p>
@@ -34,7 +34,7 @@ const reqs: Record<string, ReactNode> = {
         </div>
     ),
     macOS: (
-        <div className="text-gray-300 font-mono text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
+        <div className="text-gray-300 font-ui text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
             <h4 className="text-lg font-bold text-white mb-2 font-display text-center">Minimum Requirements</h4>
             <div className="flex flex-col gap-2">
                 <p><span className="text-red-bright">OS:</span> macOS 12 Monterey+</p>
@@ -45,7 +45,7 @@ const reqs: Record<string, ReactNode> = {
         </div>
     ),
     Linux: (
-        <div className="text-gray-300 font-mono text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
+        <div className="text-gray-300 font-ui text-[13px] text-balance flex flex-col gap-4 w-full text-left leading-relaxed">
             <h4 className="text-lg font-bold text-white mb-2 font-display text-center">Minimum Requirements</h4>
             <div className="flex flex-col gap-2">
                 <p><span className="text-red-bright">OS:</span> Ubuntu 20.04+, Debian 11+</p>
@@ -58,7 +58,6 @@ const reqs: Record<string, ReactNode> = {
 }
 
 function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
-    const [btnHovered, setBtnHovered] = useState(false)
     const icon = iconMap[platform.os] || <Image src="/linux.png" alt="Linux" width={40} height={40} className="object-contain w-full h-full brightness-0 invert" />
     const downloadUrl = envUrlMap[platform.os] || '#'
 
@@ -73,26 +72,24 @@ function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
         >
             <a
                 href={downloadUrl}
+                className="btn-download transition-colors duration-300 ease-in-out"
                 style={{
                     display: 'block',
                     width: '100%',
                     padding: '14px',
-                    background: btnHovered ? 'var(--color-red-bright)' : 'var(--color-red-core)',
+                    background: 'var(--color-red-core)',
                     color: 'var(--color-text-DEFAULT)',
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-ui)',
                     fontSize: '13px',
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
                     textAlign: 'center',
-                    transition: 'background 0.3s',
                     borderRadius: '100px',
                     textDecoration: 'none',
                     boxSizing: 'border-box',
                     position: 'relative',
                     zIndex: 30, // Make sure download button is clickable over highlights
                 }}
-                onMouseEnter={() => setBtnHovered(true)}
-                onMouseLeave={() => setBtnHovered(false)}
             >
                 Download
             </a>
@@ -152,7 +149,7 @@ export default function Download() {
                         )}
                     >
                         <ArrowLeft className="w-3.5 h-3.5 text-text-low group-hover:text-red-bright transition-colors" />
-                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
+                        <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
                             Back to Home
                         </span>
                     </Link>

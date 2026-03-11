@@ -74,7 +74,8 @@ export default function FeatureCard({ feature }: FeatureCardProps) {
             {/* p: 12px, text-mid, line-height 1.8, mb 18px */}
             <p
                 style={{
-                    fontSize: '12px',
+                    fontFamily: 'var(--font-ui)',
+                    fontSize: '13px',
                     color: 'var(--color-text-mid)',
                     lineHeight: 1.8,
                     marginBottom: '18px',

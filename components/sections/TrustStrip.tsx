@@ -29,7 +29,7 @@ export default function TrustStrip() {
                             key={i}
                             className={[
                                 'flex items-center gap-[10px] px-[32px] py-[12px]',
-                                'font-mono text-[12px] text-text-mid whitespace-nowrap',
+                                'font-ui text-[13px] text-text-mid whitespace-nowrap',
                                 // desktop: border-right, last has none
                                 i < TRUST_FACTS.length - 1
                                     ? 'border-r border-red-muted'

@@ -3,11 +3,64 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { ArrowLeft, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { cn } from '@/lib/utils'
+
+type AuthMode = 'signin' | 'signup' | 'subscribe';
 
 export default function AuthPage() {
-    const [isSignIn, setIsSignIn] = useState(true)
+    const [mode, setMode] = useState<AuthMode>('signin')
+    const [email, setEmail] = useState('')
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+    const [errorMessage, setErrorMessage] = useState('')
 
-    const toggleMode = () => setIsSignIn(!isSignIn)
+    const handleSubscribe = async () => {
+        // Basic regex check before API call
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+             setErrorMessage('Please enter a valid email');
+             setStatus('error');
+             return;
+        }
+
+        setStatus('loading');
+        setErrorMessage('');
+
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setStatus('success');
+                setEmail('');
+            } else if (res.status === 409) {
+                setStatus('error');
+                setErrorMessage('Email already subscribed.');
+            } else {
+                setStatus('error');
+                setErrorMessage(data.error || 'Something went wrong. Try again.');
+            }
+
+        } catch {
+             setStatus('error');
+             setErrorMessage('Something went wrong. Try again.');
+        }
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (mode === 'subscribe') {
+            handleSubscribe();
+        } else {
+            // Handle actual sign in/up logic when ready
+        }
+    };
+
 
     return (
         <div className="min-h-screen bg-bg text-text-DEFAULT flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -28,12 +81,19 @@ export default function AuthPage() {
             </div>
 
             {/* Back Home Link */}
-            <Link 
+            <Link
                 href="/"
-                className="absolute top-8 left-8 z-20 flex items-center gap-2 text-text-mid hover:text-text-DEFAULT transition-colors font-mono text-xs uppercase tracking-widest group"
+                className={cn(
+                    "absolute top-8 left-8 z-20 group inline-flex items-center gap-2 px-4 py-2 rounded-full",
+                    "border border-border-DEFAULT bg-bg-card",
+                    "transition-all duration-300 hover:border-red-deep hover:bg-red-dim",
+                    "shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+                )}
             >
-                <span className="group-hover:-translate-x-1 transition-transform">←</span>
-                Back
+                <ArrowLeft className="w-3.5 h-3.5 text-text-low group-hover:text-red-bright transition-colors" />
+                <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-text-low group-hover:text-text-mid transition-colors mt-[1px]">
+                    Back to Home
+                </span>
             </Link>
 
             <motion.div 
@@ -59,20 +119,19 @@ export default function AuthPage() {
                     </Link>
                 </div>
 
-                {/* Form Container */}
-                <div className="bg-bg-card/80 backdrop-blur-xl border border-border-DEFAULT rounded-[24px] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+                <div className="bg-bg-card/80 backdrop-blur-xl border border-white/10 rounded-[24px] p-8 md:p-10 shadow-2xl relative overflow-hidden">
                     
                     {/* Corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-border-red opacity-50 rounded-tl-[24px]" />
-                    <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-border-red opacity-50 rounded-br-[24px]" />
+                    <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20 opacity-50 rounded-tl-[24px]" />
+                    <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/20 opacity-50 rounded-br-[24px]" />
                     
                     <div className="flex justify-between items-end mb-8">
                         <div>
                             <h1 className="font-display text-3xl font-light mb-2">
-                                {isSignIn ? 'Welcome Back' : 'Join Orion'}
+                                {mode === 'signin' ? 'Welcome Back' : mode === 'signup' ? 'Join Orion' : 'Stay Informed'}
                             </h1>
-                            <p className="font-mono text-xs text-text-mid uppercase tracking-widest">
-                                {isSignIn ? 'Enter the system' : 'Request access'}
+                            <p className="font-ui text-xs text-text-mid uppercase tracking-widest">
+                                {mode === 'signin' ? 'Enter the system' : mode === 'signup' ? 'Request access' : 'Join the newsletter'}
                             </p>
                         </div>
                     </div>
@@ -80,7 +139,7 @@ export default function AuthPage() {
                     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                         
                         <AnimatePresence mode="popLayout">
-                            {!isSignIn && (
+                            {mode === 'signup' && (
                                 <motion.div
                                     initial={{ opacity: 0, height: 0, marginBottom: 0 }}
                                     animate={{ opacity: 1, height: 'auto', marginBottom: 24 }}
@@ -88,78 +147,119 @@ export default function AuthPage() {
                                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                                     className="space-y-2 overflow-hidden"
                                 >
-                                    <label htmlFor="name" className="block font-mono text-[10px] text-text-mid uppercase tracking-widest ml-1">
+                                    <label htmlFor="name" className="block font-ui text-[10px] text-text-mid uppercase tracking-widest ml-1">
                                         Full Name
                                     </label>
                                     <input 
                                         type="text" 
                                         id="name"
                                         placeholder="John Doe"
-                                        className="w-full bg-bg/50 border border-border-DEFAULT rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none focus:border-red-core/50 focus:bg-bg transition-colors font-mono"
+                                        className="w-full bg-[#030101] border border-white/10 rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none focus:border-red-core/50 focus:bg-black transition-colors font-ui"
                                     />
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
                         <div className="space-y-2">
-                            <label htmlFor="email" className="block font-mono text-[10px] text-text-mid uppercase tracking-widest ml-1">
+                            <label htmlFor="email" className="block font-ui text-[10px] text-text-mid uppercase tracking-widest ml-1">
                                 Email Address
                             </label>
                             <input 
                                 type="email" 
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="name@example.com"
-                                className="w-full bg-bg/50 border border-border-DEFAULT rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none focus:border-red-core/50 focus:bg-bg transition-colors font-mono"
+                                className={cn(
+                                    "w-full bg-[#030101] border rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none transition-colors font-ui",
+                                    status === 'error' ? "border-red-bright focus:border-red-bright" : "border-white/10 focus:border-red-core/50 focus:bg-black"
+                                )}
                             />
+                            {status === 'error' && (
+                                <p className="text-red-bright text-xs font-ui mt-2 ml-1 flex items-center gap-1">
+                                    <AlertCircle className="w-3 h-3" />
+                                    {errorMessage}
+                                </p>
+                            )}
+                            {status === 'success' && mode === 'subscribe' && (
+                                <p className="text-green-500 text-xs font-ui mt-2 ml-1 flex items-center gap-1">
+                                    <CheckCircle2 className="w-3 h-3" />
+                                    Subscribed! Check your email.
+                                </p>
+                            )}
                         </div>
 
-                        <div className="space-y-2">
-                            <div className="flex justify-between items-center ml-1">
-                                <label htmlFor="password" className="block font-mono text-[10px] text-text-mid uppercase tracking-widest">
-                                    Password
-                                </label>
-                                {isSignIn && (
-                                    <a href="#" className="font-mono text-[10px] text-red-core hover:text-red-bright transition-colors uppercase tracking-widest">
-                                        Forgot?
-                                    </a>
-                                )}
+                        {mode !== 'subscribe' && (
+                            <div className="space-y-2">
+                                <div className="flex justify-between items-center ml-1">
+                                    <label htmlFor="password" className="block font-ui text-[10px] text-text-mid uppercase tracking-widest">
+                                        Password
+                                    </label>
+                                    {mode === 'signin' && (
+                                        <a href="#" className="font-ui text-[10px] text-red-core hover:text-red-bright transition-colors uppercase tracking-widest">
+                                            Forgot?
+                                        </a>
+                                    )}
+                                </div>
+                                <input 
+                                    type="password" 
+                                    id="password"
+                                    placeholder="••••••••"
+                                    className="w-full bg-[#030101] border border-white/10 rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none focus:border-red-core/50 focus:bg-black transition-colors tracking-widest font-ui"
+                                />
                             </div>
-                            <input 
-                                type="password" 
-                                id="password"
-                                placeholder="••••••••"
-                                className="w-full bg-bg/50 border border-border-DEFAULT rounded-xl px-4 py-3 min-h-[52px] text-sm text-text-DEFAULT placeholder:text-text-low focus:outline-none focus:border-red-core/50 focus:bg-bg transition-colors tracking-widest font-mono"
-                            />
-                        </div>
+                        )}
 
                         <div className="pt-4">
                             <button 
-                                className="w-full bg-red-core hover:bg-red-bright text-text-DEFAULT font-mono text-xs uppercase tracking-[0.1em] py-4 rounded-xl transition-all duration-300 transform active:scale-[0.98] shadow-[0_0_20px_rgba(192,40,42,0.15)] hover:shadow-[0_0_30px_rgba(229,48,48,0.3)] relative overflow-hidden group min-h-[52px]"
+                                onClick={handleSubmit}
+                                disabled={status === 'loading'}
+                                className="w-full bg-red-core hover:bg-red-bright disabled:opacity-50 disabled:cursor-not-allowed text-text-DEFAULT font-ui text-xs uppercase tracking-[0.1em] py-4 rounded-xl transition-all duration-300 transform active:scale-[0.98] shadow-[0_0_20px_rgba(192,40,42,0.15)] hover:shadow-[0_0_30px_rgba(229,48,48,0.3)] relative overflow-hidden group min-h-[52px]"
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2">
-                                    {isSignIn ? 'Sign In' : 'Create Account'}
-                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                    {status === 'loading' ? (
+                                        <>
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                            {mode === 'subscribe' ? 'Subscribing...' : 'Processing...'}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {mode === 'signin' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Subscribe'}
+                                            <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                        </>
+                                    )}
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                             </button>
                         </div>
                     </form>
 
-                    <div className="mt-8 text-center">
-                        <p className="font-mono text-[11px] text-text-mid">
-                            {isSignIn ? "Don't have an account?" : "Already have an account?"}
+                    <div className="mt-8 text-center flex flex-col gap-2">
+                        {mode !== 'subscribe' && (
+                            <p className="font-ui text-[11px] text-text-mid">
+                                {mode === 'signin' ? "Don't have an account?" : "Already have an account?"}
+                                <button 
+                                    onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
+                                    className="ml-2 text-text-DEFAULT hover:text-red-bright transition-colors uppercase tracking-wide focus:outline-none"
+                                >
+                                    {mode === 'signin' ? 'Sign Up' : 'Sign In'}
+                                </button>
+                            </p>
+                        )}
+                        <p className="font-ui text-[11px] text-text-mid">
+                            {mode === 'subscribe' ? "Actually want to sign in?" : "Just looking for updates?"}
                             <button 
-                                onClick={toggleMode}
+                                onClick={() => setMode(mode === 'subscribe' ? 'signin' : 'subscribe')}
                                 className="ml-2 text-text-DEFAULT hover:text-red-bright transition-colors uppercase tracking-wide focus:outline-none"
                             >
-                                {isSignIn ? 'Sign Up' : 'Sign In'}
+                                {mode === 'subscribe' ? 'Go to Login' : 'Subscribe to Newsletter'}
                             </button>
                         </p>
                     </div>
                 </div>
 
                 {/* Footer text */}
-                <div className="mt-12 text-center text-text-low font-mono text-[10px] flex items-center justify-center gap-4">
+                <div className="mt-12 text-center text-text-low font-ui text-[10px] flex items-center justify-center gap-4">
                     <Link href="#" className="hover:text-text-mid transition-colors">Privacy Policy</Link>
                     <span className="w-1 h-1 rounded-full bg-border-DEFAULT" />
                     <Link href="#" className="hover:text-text-mid transition-colors">Terms of Service</Link>

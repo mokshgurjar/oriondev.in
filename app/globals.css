@@ -6,7 +6,7 @@
   /* ═══ Background ═══ */
   --color-bg: #080404;
   --color-bg-2: #0e0606;
-  --color-bg-card: #110707;
+  --color-bg-card: #050202;
 
   /* ═══ Red palette ═══ */
   --color-red-core: #c0282a;
@@ -31,8 +31,9 @@
   --color-primary-foreground: var(--color-text-DEFAULT);
 
   /* ═══ Fonts ═══ */
-  --font-display: var(--font-cormorant), serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-display: var(--font-playfair), serif;
+  --font-ui: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
 
   /* ═══ Animations ═══ */
   --animate-pulse-glow: pulse-glow 2.5s ease-in-out infinite;
@@ -120,7 +121,7 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-text-DEFAULT);
-  font-family: var(--font-mono);
+  font-family: var(--font-ui);
   font-size: 14px;
   line-height: 1.7;
   overflow-x: hidden;
@@ -191,6 +192,18 @@ button {
   transform: translateY(24px);
   animation: heroFadeUp 0.8s ease forwards;
   animation-fill-mode: both;
+}
+
+/* ═══ Typography Utilities ═══ */
+.text-gradient-red {
+  background: linear-gradient(90deg, #ff4d4d, #ff7a18);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.15);
 }
 
 /* glow div = child 1, h1 = child 2, buttons = child 3, stats = child 4 */
@@ -282,5 +295,40 @@ button {
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* User requested Button Hover Effects applied globally */
+  .btn-primary {
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background: #e84135;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    transition: border-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  .btn-nav {
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-nav:hover {
+    background: rgba(207, 58, 47, 0.15);
+  }
+
+  .btn-download {
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-download:hover {
+    background: #e84135;
   }
 }

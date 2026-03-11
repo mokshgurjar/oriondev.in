@@ -39,7 +39,7 @@ export default function Footer() {
                         <li key={link.label}>
                             <Link
                                 href={link.href}
-                                className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-mid transition-colors duration-300 hover:text-text-DEFAULT"
+                                className="font-ui text-[11px] uppercase tracking-[0.08em] text-text-mid transition-colors duration-300 hover:text-text-DEFAULT"
                             >
                                 {link.label}
                             </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
                 </ul>
 
                 {/* footer-copy: mono, 11px, text-low */}
-                <div className="font-mono text-[11px] text-text-low">
+                <div className="font-ui text-[11px] text-text-low">
                     © 2026 Orion IDE
                 </div>
             </div>
