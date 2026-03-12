@@ -3,9 +3,7 @@
 import { Instagram, Github, Globe } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import type * as React from "react";
-import { Button } from "@/components/ui/Button";
 import {
     Drawer,
     DrawerClose,
@@ -115,30 +113,33 @@ export default function SmoothDrawer({
                     <motion.div variants={itemVariants as any} className="w-full">
                         <DrawerFooter className="flex flex-col gap-3 px-2 pb-2">
                             <div className="flex flex-col gap-3 w-full">
-                                <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-red-bright to-red-core font-ui font-medium text-[13px] uppercase text-white tracking-widest shadow-lg shadow-red-core/20 transition-all duration-500 hover:from-red-500 hover:to-red-700 hover:shadow-red-core/40"
-                                    href="https://discord.com"
+                                <a
+                                    className="group inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 font-ui font-medium text-[13px] uppercase text-text-mid tracking-widest transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-text-DEFAULT"
+                                    href="https://discord.gg/4EHH7cp399"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <FaDiscord className="w-4 h-4" />
                                     Discord
-                                </Link>
-                                <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-900 font-ui font-medium text-[13px] uppercase text-white tracking-widest border border-zinc-700 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-800"
-                                    href="https://github.com"
+                                </a>
+                                <a
+                                    className="group inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 font-ui font-medium text-[13px] uppercase text-text-mid tracking-widest transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-text-DEFAULT"
+                                    href="https://github.com/Congneo-Org"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <Github className="w-4 h-4" />
                                     GitHub
-                                </Link>
-                                <Link
-                                    className="group relative inline-flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 font-ui font-medium text-[13px] uppercase text-white tracking-widest shadow-lg transition-all duration-500 hover:opacity-90"
+                                </a>
+                                <a
+                                    className="group inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 font-ui font-medium text-[13px] uppercase text-text-mid tracking-widest transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-text-DEFAULT"
                                     href="https://www.instagram.com/cogneoverse?igsh=NTFhMDRnbG9yOTNy"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <Instagram className="w-4 h-4" />
                                     Instagram
-                                </Link>
+                                </a>
                             </div>
                             <DrawerClose asChild>
                                 <button
