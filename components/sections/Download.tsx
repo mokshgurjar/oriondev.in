@@ -12,11 +12,7 @@ const iconMap: Record<string, React.ReactNode> = {
     Linux: <Image src="/linux.png" alt="Linux" width={40} height={40} className="object-contain w-full h-full brightness-0 invert" />,
 }
 
-const envUrlMap: Record<string, string | undefined> = {
-    macOS: process.env.NEXT_PUBLIC_DOWNLOAD_URL_MAC,
-    Windows: process.env.NEXT_PUBLIC_DOWNLOAD_URL_WIN,
-    Linux: process.env.NEXT_PUBLIC_DOWNLOAD_URL_LINUX,
-}
+
 
 import HighlightCard from '@/components/ui/highlight-card'
 import { ReactNode } from 'react'
@@ -59,7 +55,7 @@ const reqs: Record<string, ReactNode> = {
 
 function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
     const icon = iconMap[platform.os] || <Image src="/linux.png" alt="Linux" width={40} height={40} className="object-contain w-full h-full brightness-0 invert" />
-    const downloadUrl = envUrlMap[platform.os] || '#'
+    const downloadUrl = '/ORION.zip'
 
     return (
         <HighlightCard
@@ -72,6 +68,7 @@ function DownloadCard({ platform }: { platform: typeof PLATFORMS[number] }) {
         >
             <a
                 href={downloadUrl}
+                download="ORION.zip"
                 className="btn-download transition-colors duration-300 ease-in-out"
                 style={{
                     display: 'block',

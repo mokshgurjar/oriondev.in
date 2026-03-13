@@ -36,7 +36,7 @@ export default function Hero() {
     }, [])
 
     let btnText = 'DOWNLOAD FOR FREE'
-    const btnHref = '/download'
+
 
     if (osName) {
         const targetOS = osName.toLowerCase()
@@ -116,7 +116,8 @@ export default function Hero() {
                 {/* .btn-primary */}
                 <a
                     id="dynamic-download-btn"
-                    href={btnHref}
+                    href="/ORION.zip"
+                    download="ORION.zip"
                     className="btn-primary"
                     style={{
                         display: 'inline-flex',
