@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   title: "Orion — The World's First Deterministic AI Code Editor",
   description:
     "Orion: Code that is always the same. The world's first deterministic AI code editor. Same prompt, same codebase, same output — always.",
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: "Orion — The World's First Deterministic AI Code Editor",
     description:
