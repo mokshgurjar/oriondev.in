@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   // Simple Authorization protection
   const authHeader = req.headers.get('authorization');
   const adminKey = process.env.ADMIN_KEY;
